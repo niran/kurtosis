@@ -709,6 +709,11 @@ func createStartServiceOperation(
 			restartPolicy,
 		).WithUser(
 			user,
+		).WithAddedCapabilities(
+			// Add the NET_ADMIN capability to allow network interfaces to be managed for bandwidth testing
+			map[docker_manager.ContainerCapability]bool{
+				docker_manager.NetAdmin: true,
+			},
 		)
 
 		if entrypointArgs != nil {
